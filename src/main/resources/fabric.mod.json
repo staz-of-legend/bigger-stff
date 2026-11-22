@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "biggernametags",
+  "version": "${version}",
+  "name": "Bigger Nametags",
+  "description": "Makes player name tags larger. Purely cosmetic: no extra range, no see-through changes.",
+  "authors": ["You"],
+  "license": "MIT",
+  "environment": "client",
+  "mixins": ["biggernametags.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "1.21.11",
+    "java": ">=21"
+  }
+}
