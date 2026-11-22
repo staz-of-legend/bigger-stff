@@ -12,6 +12,7 @@ import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
@@ -40,5 +41,13 @@ public abstract class EntityRendererMixin<T, S extends EntityRenderState> {
 	private void biggernametags$popScale(S state, Text text, MatrixStack matrices,
 			OrderedRenderCommandQueue queue, CameraRenderState camera, CallbackInfo ci) {
 		matrices.pop();
+	}
+
+	/** Recolors the name text. Size/color only: nothing about visibility changes. */
+	@ModifyVariable(method = "renderLabelIfPresent", at = @At("HEAD"), argsOnly = true)
+	private Text biggernametags$recolor(Text text) {
+		int c = BiggerNametags.color();
+		if (c < 0 || text == null) return text;
+		return text.copy().setStyle(text.getStyle().withColor(c));
 	}
 }
